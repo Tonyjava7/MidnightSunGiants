@@ -12,3 +12,10 @@ The users can connect and socialize with other event users by taking and uploadi
 The web-app will match the location with the time to show that the user is at an event which can be shared with other users and vendors.  We will use eventful.API to match the user and event, and use mysportsfeeds.API to gather sports stats.
 
 We will create 2 screens: 1 for user interface and 1 for vendor and after-event usage.
+
+Project tasks before next meetup:
+
+1. Create the firebase database. (Tony)
+2. Figure out how to upload pictures to firebase. (Tony and Logan)
+3. Create the HTML & CSS framework. (Charles)
+4. Research API interface. (Candace)
