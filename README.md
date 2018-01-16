@@ -19,3 +19,19 @@ Project tasks before next meetup:
 2. Figure out how to upload pictures to firebase. (Tony and Logan)
 3. Create the HTML & CSS framework. (Charles)
 4. Research API interface. (Candace)
+
+Firebase:
+
+<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBn5xUU9cipD3IVxgi750aYFO-bM_AM85A",
+    authDomain: "midnightsungiants.firebaseapp.com",
+    databaseURL: "https://midnightsungiants.firebaseio.com",
+    projectId: "midnightsungiants",
+    storageBucket: "midnightsungiants.appspot.com",
+    messagingSenderId: "849065062207"
+  };
+  firebase.initializeApp(config);
+</script>
