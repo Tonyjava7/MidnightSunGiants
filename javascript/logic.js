@@ -1,5 +1,5 @@
 /**
- * [config description]
+ * firebaseConfig is the configuration information for firebase
  * @type {Object}
  */
 let firebaseConfig = {
@@ -11,13 +11,20 @@ let firebaseConfig = {
     messagingSenderId: "849065062207"
   };
 
+/**
+ * displayEventScreen displays the event screen
+ */
 let displayEventScreen = function()
 {
 	let event_div = document.getElementById("table_screen"); 
 	event_div.style.display = "block";
 
-};
+}; // End of displayEventScreen()
 
+/**
+ * displayPage is the event listener for the navigation items
+ * @param  {Object} event - The click event on a navigation item
+ */
 let displayPage = function(event)
 {
 	// Get handles to all the divs representing top level screensl
@@ -50,7 +57,9 @@ let displayPage = function(event)
 
 }; // End of let displayPage = function(event)
 
-
+/**
+ * The ready function
+ */
 $( document ).ready(function() 
 {
     // Add a click event listener to all elements with a class of "nav-link"
