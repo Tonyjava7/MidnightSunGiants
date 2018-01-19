@@ -30,10 +30,13 @@ let displayPage = function(event)
 	// Get handles to all the divs representing top level screensl
     let event_div = document.getElementById("table_screen"); 
     let picture_div = document.getElementById("picture_screen");
+    let stats_div = document.getElementById("stats_screen");
+
 
     // Set the display of all the top level divs to "none"
     event_div.style.display = "none";
     picture_div.style.display = "none";
+    stats_div.style.display = "none";
     
     // Get the data-name of the object that was clicked
     let name = event.target.getAttribute("data-name");
@@ -44,14 +47,16 @@ let displayPage = function(event)
     switch (name)
     {
     	case "event_screen_nav":
-            console.log("doWhut");
             event_div.style.display = "block";
             break;
 
         case "picture_screen_nav":
-            console.log("edit_items");
             picture_div.style.display = "block";
             break;
+
+        case "stats_screen_nav":
+        	stats_div.style.display = "block";
+        	break;
 
     } // End of switch (name)
 
