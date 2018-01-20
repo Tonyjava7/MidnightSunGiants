@@ -10,7 +10,7 @@ console.log("api.js is working")
 // 	})
 // }
 
-
+//workiing on adding the API
 
 // var topics= ["apple", "pear","strawberry", "banana", "pineapple","grapes", "plum"];
 var topic ;
