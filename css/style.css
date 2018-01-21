@@ -6,3 +6,7 @@
 .screen{
 	display: none;
 }
+
+#add-photo {
+	border: 1px solid lightgrey;
+}

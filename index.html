@@ -2,11 +2,11 @@
 
 <html>
 <head>
-	 <meta charset="UTF-8">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	 	<meta charset="UTF-8">
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="javascript/geocodeLogan.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-   <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+   	<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
 </script>
    <script src="javascript/logic.js"></script>
     <script src="javascript/sportAPI.js"></script>
@@ -27,10 +27,10 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" data-name="picture_screen_nav" id="picture_btn" href="#">Photographs</a>
-        </li>  
+        </li>
           <li class="nav-item">
             <a class="nav-link" data-name="stats_screen_nav" id="stats_btn" href="#">Statistics</a>
-        </li>    
+        </li>
     </ul>
 </nav>
 
@@ -57,10 +57,8 @@
                 <tr>
                  	<th scope="col">Date</th>
                  	<th scope="col">Time</th>
-                 	<th scope="col">Venue</th>
-                 	<th scope="col">Description</th>
+                 	<th scope="col">City</th>
                  	<th scope="col">Picture Count</th>
-                 	<th scpoe="col">Statistics</th>
                 </tr>
             </thead>
             <tbody>
@@ -70,43 +68,59 @@
             			1/8/18
             		</td>
             		<td>
-            			8:00
+            			8:00 PM
             		</td>
             		<td>
-            			Fox
-            		</td>
-            		<td>
-            			Concert
+            			Detroit, MI
             		</td>
             		<td>
             			25
             		</td>
+            	</tr>
+							<tr>
             		<td>
-            			stats
+            			1/15/18
+            		</td>
+            		<td>
+            			6:14 PM
+            		</td>
+            		<td>
+            			New York, NY
+            		</td>
+            		<td>
+            			32
             		</td>
             	</tr>
-            	<tr>
+							<tr>
             		<td>
-            			1/30/18
+            			1/19/18
             		</td>
             		<td>
-            			7:30
+            			11:52 AM
             		</td>
             		<td>
-            			Phillips Arena
+            			Tuscon, AZ
             		</td>
             		<td>
-            			Basketball
+            			14
+            		</td>
+            	</tr>
+							<tr>
+            		<td>
+            			FIREBASE
             		</td>
             		<td>
-            			65
+            			FIREBASE
             		</td>
             		<td>
-            			Score from game
+            			<span class="city"></span>, <span class="state"></span>
+            		</td>
+            		<td>
+            			COUNTER
             		</td>
             	</tr>
             </tbody>
-              
+
             </table>
         </div>
 
@@ -145,11 +159,10 @@
     <div class="jumbotron">
         <h1 class="text-center">Our Stats Screen</h1>
         <h3 class="text-center">Here ya go, Candace!!</h3>
-        
+
     </div>
 </div>
 </div>
 </div>
 </body>
 </html>
-
