@@ -59,21 +59,17 @@ $(document).ready(function(){
 
 
     dataRef.ref().push({
-      photo: photo
+      photo: photo,
+      city: city
     });
   });
 
   dataRef.ref().on("child_added", function(snapshot) {
     $("#well").append("<img src=" + snapshot.val().photo + ">");
+    $("#well").append(city);
     counter++;
     $("#counter").html(counter);
   });
-
-
-
-
-
-
 
 
 
