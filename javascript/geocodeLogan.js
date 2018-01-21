@@ -11,6 +11,9 @@ $(document).ready(function(){
       longitude = position.coords.longitude;
       $.getJSON("https://api.wunderground.com/api/" + key + "/forecast/geolookup/conditions/q/" + latitude + "," + longitude + ".json", function(data) {
           city = data.location.city;
+          state = data.location.state;
+          $(".city").html(city);
+          $(".state").html(state);
       });
   };
   //geolocator ends here
@@ -40,13 +43,35 @@ $(document).ready(function(){
       task.on('state_changed', function progress(snapshot) {
           var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           uploader.value = percentage;
-          $("#well").append("<img src='#'>")  
       }, function error(err) {
       }, function complete() {
       });
   });
 
   // Download starts here
+  var dataRef = firebase.database();
+  var photo = "";
+  var counter = 0;
+
+  $("#add-photo").on("click", function() {
+
+    photo = $("#photo-input").val().trim();
+
+
+    dataRef.ref().push({
+      photo: photo
+    });
+  });
+
+  dataRef.ref().on("child_added", function(snapshot) {
+    $("#well").append("<img src=" + snapshot.val().photo + ">");
+    counter++;
+    $("#counter").html(counter);
+  });
+
+
+
+
 
 
 
