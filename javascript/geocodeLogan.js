@@ -73,10 +73,13 @@ $(document).ready(function(){
 
     if (cityArray.indexOf(city) === -1) {
       cityArray.push(city);
-      $(".eventTable").append("<tr><td>FIREBASE</td><td>FIREBASE</td><td>"+city+", "+state+"</td><td id='counter'>"+counter+"</td></tr>");
+      $(".eventTable").append("<tr><td id='date'>"+date+"</td><td id='time'>"+time+"</td><td>"+city+", "
+      +state+"</td><td id='counter'>"+counter+"</td></tr>");
     } else {
       counter++;
       $("#counter").html(counter);
+      $("#date").html(date);
+      $("#time").html(time);
     }
 
     $("#well").prepend("<img src="+snapshot.val().photo+" class='photos'>")
