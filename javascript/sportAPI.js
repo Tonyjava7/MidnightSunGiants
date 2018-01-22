@@ -1,67 +1,111 @@
-
+//API for the stats page
 console.log("api.js is working")
-// function addPhoto(){
-// 	$("#upload_btn").on("click",function(event){
 
-// 		// var image =$("<img>").attr("src","../images/testphoto.jpg");
-// 		$("#userPhoto").text("jump");
-// 		// $("#userPhoto").prepend(image);
-// 		console.log("photo")
-// 	})
-// }
-
-//workiing on adding the API
-
-// var topics= ["apple", "pear","strawberry", "banana", "pineapple","grapes", "plum"];
-var topic ;
-var phrase;
 var queryURL;
-var still;
+var seasonStatisticsUrl;
+var rankingUrl
+var city=[];
+var idnum={};
+var cityId;
+var userCity;
+var roster=[];
 
 
-function pickGiphy() {
-	var choice = $(this).attr("choiceName");
-	 queryURL = ["http://api.eventful.com/json/events/search?app_key=GRHKjTBng3snrgbN&location=Atlanta"];
-// https://api.mysportsfeeds.com/v1.1/pull/nba/current/full_game_schedule.json
+function loadCityID() {
+
+// Full schedule for all NBA teams. The API uses and id # for each team. this ID is needed to access data for other statistics.
+	queryURL = ["http://api.sportradar.us/nba/trial/v4/en/games/2017/REG/schedule.json?api_key=s2pvp6etztq3d6zcyvquqgt4"]
+
 	$.ajax({
 		url: queryURL,
 		method: "GET"
 	}).done(function(response) {
 	
+		// v should really be the total number of records in the object, then add an addional if then statement to ensure that each city is only listed once. using 0-100 works for now
+	for(var v = 0; v < 100; v++){
+	// console.log(response)
+	 city[v] = response.games[v].venue.city.toLowerCase();
+	 idnum[v] = response.games[v].home.id;
 
-		// $(".images").empty();
-		// $("")
-		console.log("two")
-	for(var v = 0; v < 4; v++)
-
-{
-	var pick = event.events.title;
-	// var pickVid = response.data[v].images.original.url;
-	var rating = response.data[v].rating;
-	var pickSpot =$ ("<div class='store'>");
-
-	var image =$("<img>").attr("src",pick);
-		image.addClass("display");
-		image.attr("data-state",still);
-		image.attr("data-still",pick);
-		// image.attr("data-animate",pickVid);
-
-	var rate =$("<div class='rate'>");
-	console.log("api")
-
-
-	var testPhrase =$("<p>").text(topic);
-
-	pickSpot.append(image);
-	// pickSpot.html("<li> rating</li>");
-	rate.prepend(rating);
-
-	// console.log(image)
-
-	$(".images").prepend(pickSpot);
-	$(".rate").prepend(rating)
-}
+  	}
+	// console.log(city)
+	// console.log(city[6])
+	var a = city.indexOf("Boston");
+	console.log(a)
 	})
-	}
+}
 
-	$(document).on("click", "#submit",pickGiphy);
+
+	$(document).on("click", "#stats_btn",loadCityID);
+
+function seasonsStats() {
+	
+	seasonStatisticsUrl= ["http://api.sportradar.us/nba/trial/v4/en/seasons/2017/REG/teams/"+cityId+"/statistics.json?api_key=s2pvp6etztq3d6zcyvquqgt4"]
+//legacy link from API docs with the id filled in
+
+	// seasonStatisticsUrl= ["http://api.sportradar.us/nba/trial/v4/en/seasons/2017/REG/teams/583eca2f-fb46-11e1-82cb-f4ce4684ea4c/statistics.json?api_key=s2pvp6etztq3d6zcyvquqgt4"]
+
+	$.ajax({
+		url: seasonStatisticsUrl,
+		method: "GET"
+	}).done(function(response2) {
+		console.log(response2.name)
+		console.log(response2.own_record.average.points)
+
+		var name= response2.name;
+		var market = response2.market;
+		var ppg  =response2.own_record.average.points;
+		for (var j = 0; j < 15; j++){
+		 roster[j] = response2.players[j].full_name;}
+		console.log(ppg)
+		console.log(roster)
+
+//update the dom with a bootstrap card showing stats for the team
+		$("#statCards").html("<div class='card'><div class='card-body'><h5>"+market+" "+name+"</h5><p>Average Points per Game:"+ppg+"</p><p>Roster</p><p>"+roster+"</p></div></div>");
+
+})
+}	
+// I would love to show the number of wins each team has but this API requres adding the conference and division into the json
+
+// function getRanking(){
+
+// 	rankingUrl="http://api.sportradar.us/nba/trial/v4/en/seasons/2017/REG/standings.json?api_key=s2pvp6etztq3d6zcyvquqgt4"
+
+// 	$.ajax({
+// 		url: rankingUrl,
+// 		method: "GET"
+// 	}).done(function(response3) {
+
+// 		console.log(response3.conferences[0].divisions[0].teams[0])
+// })
+// }
+
+
+$(document).on("click","#btn2",pickCity);
+$(document).on("click","#btn2",seasonsStats);
+
+
+
+
+
+function pickCity() {
+
+userCity = $("#userInputCity").val().trim().toLowerCase();
+// console.log(userCity)
+// console.log(city)
+var a = city.indexOf(userCity);
+	console.log(a)
+
+	if (a === "-1"){
+		console.log("name not in database")}
+		else
+
+		
+	
+{cityId = idnum[a];}
+// console.log(cityId)
+
+// console.log(a)
+
+}
+
