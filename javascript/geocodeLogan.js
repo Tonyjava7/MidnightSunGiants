@@ -12,8 +12,6 @@ $(document).ready(function(){
       $.getJSON("https://api.wunderground.com/api/" + key + "/forecast/geolookup/conditions/q/" + latitude + "," + longitude + ".json", function(data) {
           city = data.location.city;
           state = data.location.state;
-          $(".city").html(city);
-          $(".state").html(state);
       });
   };
   //geolocator ends here
@@ -53,15 +51,21 @@ $(document).ready(function(){
   var photo = "";
   var counter = 1;
   var cityArray = ["Chicago", "New York", "Phoenix"];
+  var time = "";
+  var date = "";
 
   $("#add-photo").on("click", function() {
 
     photo = $("#photo-input").val().trim();
 
+    time = moment(moment()).format("hh:mm");
+    date = moment().format("L");
 
     dataRef.ref().push({
       photo: photo,
-      city: city
+      city: city,
+      time: time,
+      date: date
     });
   });
 
