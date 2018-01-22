@@ -10,3 +10,11 @@
 #add-photo {
 	border: 1px solid lightgrey;
 }
+
+.photos {
+	height: 250px;
+	width: 250px;
+	border: 2px solid black;
+	border-radius: 5px;
+	margin: 20px;
+}

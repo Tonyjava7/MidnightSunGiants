@@ -51,7 +51,8 @@ $(document).ready(function(){
   // Download starts here
   var dataRef = firebase.database();
   var photo = "";
-  var counter = 0;
+  var counter = 1;
+  var cityArray = ["Chicago", "New York", "Phoenix"];
 
   $("#add-photo").on("click", function() {
 
@@ -65,10 +66,16 @@ $(document).ready(function(){
   });
 
   dataRef.ref().on("child_added", function(snapshot) {
-    $("#well").append("<img src=" + snapshot.val().photo + ">");
-    $("#well").append(city);
-    counter++;
-    $("#counter").html(counter);
+
+    if (cityArray.indexOf(city) === -1) {
+      cityArray.push(city);
+      $(".eventTable").append("<tr><td>FIREBASE</td><td>FIREBASE</td><td>"+city+", "+state+"</td><td id='counter'>"+counter+"</td></tr>");
+    } else {
+      counter++;
+      $("#counter").html(counter);
+    }
+
+    $("#well").prepend("<img src="+snapshot.val().photo+" class='photos'>")
   });
 
 
