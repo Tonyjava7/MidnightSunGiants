@@ -26,3 +26,8 @@
 #photo-input {
 	width: 30%;
 }
+
+#camera {
+	height: 2em;
+	width: 4em;
+}

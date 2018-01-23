@@ -1,5 +1,6 @@
 $(document).ready(function(){
   var city = "";
+  var state = "";
   //geolocator starts here
   var key = "a9a61bb81ae8bbec";
   navigator.geolocation.getCurrentPosition(success, error);
@@ -12,6 +13,73 @@ $(document).ready(function(){
       $.getJSON("https://api.wunderground.com/api/" + key + "/forecast/geolookup/conditions/q/" + latitude + "," + longitude + ".json", function(data) {
           city = data.location.city;
           state = data.location.state;
+
+
+
+        //Firebase Storage
+        // var uploader = document.getElementById('uploader');
+        // var fileButton = document.getElementById('fileButton');
+        // fileButton.addEventListener('change', function(e) {
+        //     var file = e.target.files[0];
+        //     var storageRef = firebase.storage().ref('img/' + file.name);
+        //     var metadata = {
+        //         customMetadata: {
+        //             'city': city
+        //         }
+        //     }
+        //     var task = storageRef.put(file, metadata);
+        //     task.on('state_changed', function progress(snapshot) {
+        //         var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        //         uploader.value = percentage;
+        //     }, function error(err) {
+        //     }, function complete() {
+        //     });
+        // });
+
+        // Download starts here
+        var dataRef = firebase.database();
+        var photo = "";
+        var counter = 1;
+        var array = ["Chicago", "New York", "Phoenix"];
+        localStorage.setItem("array", JSON.stringify(array));
+        var storedArray = JSON.parse(localStorage.getItem("array"));
+        var time = "";
+        var date = "";
+
+        $("#add-photo").on("click", function() {
+
+          photo = $("#photo-input").val().trim();
+          time = moment(moment()).format("hh:mm A");
+          date = moment().format("L");
+
+          dataRef.ref().push({
+            photo: photo,
+            city: city,
+            state: state,
+            time: time,
+            date: date,
+            counter: counter
+          });
+        });
+
+        dataRef.ref().on("child_added", function(snapshot) {
+          counter++;
+
+          if (array.indexOf(city) === -1 && (storedArray === null || storedArray.indexOf(city) === -1)) {
+            array.push(snapshot.val().city);
+            localStorage.setItem("array", JSON.stringify(array));
+            storedArray = JSON.parse(localStorage.getItem("array"));
+            $(".eventTable").append("<tr><td id='date'>"+snapshot.val().date+
+            "</td><td id='time'>"+snapshot.val().time+"</td><td>"+
+            snapshot.val().city+", "+snapshot.val().state+"</td><td id='counter'>"+snapshot.val().counter+"</td></tr>");
+          } else {
+            $("#counter").html(snapshot.val().counter);
+            $("#date").html(snapshot.val().date);
+            $("#time").html(snapshot.val().time);
+            }
+
+          $("#well").prepend("<img src="+snapshot.val().photo+" class='photos'>")
+        });
       });
   };
   //geolocator ends here
@@ -25,67 +93,7 @@ $(document).ready(function(){
     storageBucket: "test-project-d958e.appspot.com",
     messagingSenderId: "496730470430"
   };
-
   firebase.initializeApp(config);
-  var uploader = document.getElementById('uploader');
-  var fileButton = document.getElementById('fileButton');
-  fileButton.addEventListener('change', function(e) {
-      var file = e.target.files[0];
-      var storageRef = firebase.storage().ref('img/' + file.name);
-      var metadata = {
-          customMetadata: {
-              'city': city
-          }
-      }
-      var task = storageRef.put(file, metadata);
-      task.on('state_changed', function progress(snapshot) {
-          var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          uploader.value = percentage;
-      }, function error(err) {
-      }, function complete() {
-      });
-  });
-
-  // Download starts here
-  var dataRef = firebase.database();
-  var photo = "";
-  var counter = 1;
-  var cityArray = ["Chicago", "New York", "Phoenix"];
-  var time = "";
-  var date = "";
-
-  $("#add-photo").on("click", function() {
-
-    photo = $("#photo-input").val().trim();
-
-    time = moment(moment()).format("hh:mm");
-    date = moment().format("L");
-
-    dataRef.ref().push({
-      photo: photo,
-      city: city,
-      time: time,
-      date: date
-    });
-  });
-
-  dataRef.ref().on("child_added", function(snapshot) {
-
-    if (cityArray.indexOf(city) === -1) {
-      cityArray.push(city);
-      $(".eventTable").append("<tr><td id='date'>"+date+"</td><td id='time'>"+time+"</td><td>"+city+", "
-      +state+"</td><td id='counter'>"+counter+"</td></tr>");
-    } else {
-      counter++;
-      $("#counter").html(counter);
-      $("#date").html(date);
-      $("#time").html(time);
-    }
-
-    $("#well").prepend("<img src="+snapshot.val().photo+" class='photos'>")
-  });
-
-
 
 
 });
