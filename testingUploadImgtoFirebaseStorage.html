@@ -8,7 +8,11 @@
     <title>Firebase Web Basics</title>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet">
+<<<<<<< HEAD
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+=======
+
+>>>>>>> cjAPI
     <script src="https://use.fontawesome.com/939e9dd52c.js"></script>
 
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -26,6 +30,7 @@
 
     <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
     <script>
+<<<<<<< HEAD
         var uploader = document.getElementById('uploader');
         var fileButton = document.getElementById('fileButton');
         fileButton.addEventListener('change', function(e) {
@@ -72,6 +77,41 @@
     </script>
 
 
+=======
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBn5xUU9cipD3IVxgi750aYFO-bM_AM85A",
+            authDomain: "midnightsungiants.firebaseapp.com",
+            databaseURL: "https://midnightsungiants.firebaseio.com",
+            projectId: "midnightsungiants",
+            storageBucket: "midnightsungiants.appspot.com",
+            messagingSenderId: "849065062207"
+        };
+        firebase.initializeApp(config);
+        //-------------------------------------
+
+        var uploader = document.getElementById('uploader');
+        var fileButton = document.getElementById('fileButton');
+        fileButton.addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            var storageRef = firebase.storage().ref('img/' + file.name);
+            var task = storageRef.push(file);
+            task.on('state_changed', function progress(snapshot) {
+                var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                uploader.value = percentage;
+
+            }, function error(err) {
+
+
+            }, function complete() {
+
+            });
+        });
+    </script>
+
+    <script src="fileup.js">
+    </script>
+>>>>>>> cjAPI
 </body>
 
 </html>
