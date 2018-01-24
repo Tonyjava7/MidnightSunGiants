@@ -68,7 +68,7 @@ function seasonsStats() {
 		console.log(roster)
 
 //update the dom with a bootstrap card showing stats for the team
-		$("#statCards").html("<div class='card'><div class='card-body'><h5>"+market+" "+name+"</h5><p>Average Points per Game:"+ppg+"</p><p>Roster</p><p>"+roster+"</p></div></div>");
+		$("#statCards").append("<div class='card snippet'><div class='card-body'><h5>"+market+" "+name+"</h5><p>Average Points per Game:"+ppg+"</p><p>Roster</p><p>"+roster+"</p></div></div>");
 
 })
 }	
