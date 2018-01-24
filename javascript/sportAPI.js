@@ -26,7 +26,7 @@ function loadCityID() {
 		url: queryURL,
 		method: "GET"
 	}).done(function(response) {
-		console.log(response)
+		// console.log(response)
 	
 		// v should really be the total number of records in the object, then add an addional if then statement to ensure that each city is only listed once. using 0-100 works for now
 	for(var v = 0; v < 100; v++){
@@ -58,17 +58,19 @@ function seasonsStats() {
 	}).done(function(response2) {
 		console.log(response2.name)
 		console.log(response2.own_record.average.points)
-
+// grab data from api and store
 		var name= response2.name;
 		var market = response2.market;
 		var ppg  =response2.own_record.average.points;
 		for (var j = 0; j < 15; j++){
-		 roster[j] = response2.players[j].full_name;}
+		 roster[j] = response2.players[j].full_name;
+		 var rosterSpace=roster.join(', ');}
 		console.log(ppg)
-		console.log(roster)
+		// console.log(roster)
 
 //update the dom with a bootstrap card showing stats for the team
-		$("#statCards").html("<div class='card'><div class='card-body'><h5>"+market+" "+name+"</h5><p>Average Points per Game:"+ppg+"</p><p>Roster</p><p>"+roster+"</p></div></div>");
+
+		$("#statCards").prepend("<div class='card'><div class='card-body'><h5>"+market+" "+name+"</h5><p>Average Points per Game:"+ppg+"</p><p>Roster</p><p>"+rosterSpace+"</p></div></div>");
 
 })
 }	
@@ -103,16 +105,17 @@ userCity = $("#userInputCity").val().trim().toLowerCase();
 var a = city.indexOf(userCity);
 	console.log(a)
 
-	// if (a === -1){
-	// 	console.log("name not in database")}
-	// 	else
+	if (a === -1){
+		console.log("name not in database")
+		$("#statCards").prepend("<div class='card'>"+userCity+ " 'not found in database'</div>")}
+		else
 
 		
 	
 {cityId = idnum[a];}
-// console.log(cityId)
+console.log(cityId)
 
 // console.log(a)
-
+// seasonsStats();
 }
 

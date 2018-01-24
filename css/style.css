@@ -6,3 +6,9 @@
 .screen{
 	display: none;
 }
+
+.jumbotron{
+	background-image: url("../images/crowdPhone.jpeg");
+	/*max-width: 100%;
+	max-height: 100%;*/
+}
