@@ -16,10 +16,17 @@ function loadCityID() {
 // Full schedule for all NBA teams. The API uses and id # for each team. this ID is needed to access data for other statistics.
 	queryURL = ["http://api.sportradar.us/nba/trial/v4/en/games/2017/REG/schedule.json?api_key=s2pvp6etztq3d6zcyvquqgt4"]
 
+ jQuery.ajaxPrefilter(function(options) {
+    if (options.crossDomain && jQuery.support.cors) {
+        options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+    }
+    
+}); 
 	$.ajax({
 		url: queryURL,
 		method: "GET"
 	}).done(function(response) {
+		console.log(response)
 	
 		// v should really be the total number of records in the object, then add an addional if then statement to ensure that each city is only listed once. using 0-100 works for now
 	for(var v = 0; v < 100; v++){
@@ -96,9 +103,9 @@ userCity = $("#userInputCity").val().trim().toLowerCase();
 var a = city.indexOf(userCity);
 	console.log(a)
 
-	if (a === "-1"){
-		console.log("name not in database")}
-		else
+	// if (a === -1){
+	// 	console.log("name not in database")}
+	// 	else
 
 		
 	
