@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+    <title>Our Event Project</title>
+
+</head>
+
+<body>
+
+    <script>
+        var config = {
+            apiKey: "AIzaSyBn5xUU9cipD3IVxgi750aYFO-bM_AM85A",
+            authDomain: "midnightsungiants.firebaseapp.com",
+            databaseURL: "https://midnightsungiants.firebaseio.com",
+            projectId: "midnightsungiants",
+            storageBucket: "midnightsungiants.appspot.com",
+            messagingSenderId: "849065062207"
+        };
+
+        firebase.initializeApp(config);
+
+        var storageRef = firebase.storage.ref("img/AY.jpg");
+        storageRef.getDownloadURL().then(function(url) {
+            console.log(url);
+        });
+    </script>
+</body>
+
+</html>

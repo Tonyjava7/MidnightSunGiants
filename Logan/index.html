@@ -4,16 +4,15 @@
 
 <head>
     <meta charset="UTF-8">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="Logan/geocodeLogan.js"></script>
+    <script type="text/javascript" src="geocodeLogan.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
     </script>
     <script src="javascript/logic.js"></script>
     <script src="javascript/sportAPI.js"></script>
     <link rel="stylesheet" href="css/style.css">
-    <title>SWIRLFI</title>
+    <title>Our Event Project</title>
 
 </head>
 
@@ -21,8 +20,7 @@
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark top-nav">
         <!-- Brand/logo -->
-        <a class="navbar-brand" data-name="our_brand" href="#">SWIRLFI</a>
-        <img id="logo" src="images/swirl-green.png">
+        <a class="navbar-brand" data-name="our_brand" href="#">Our Brand</a>
         <!-- Links -->
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -60,10 +58,8 @@
                             <tr>
                                 <th scope="col">Date</th>
                                 <th scope="col">Time</th>
-                                <th scope="col">Venue</th>
-                                <th scope="col">Description</th>
+                                <th scope="col">City</th>
                                 <th scope="col">Picture Count</th>
-                                <th scpoe="col">Statistics</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,39 +69,55 @@
                                     1/8/18
                                 </td>
                                 <td>
-                                    8:00
+                                    8:00 PM
                                 </td>
                                 <td>
-                                    Fox
-                                </td>
-                                <td>
-                                    Concert
+                                    Detroit, MI
                                 </td>
                                 <td>
                                     25
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>
-                                    stats
+                                    1/15/18
+                                </td>
+                                <td>
+                                    6:14 PM
+                                </td>
+                                <td>
+                                    New York, NY
+                                </td>
+                                <td>
+                                    32
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    1/30/18
+                                    1/19/18
                                 </td>
                                 <td>
-                                    7:30
+                                    11:52 AM
                                 </td>
                                 <td>
-                                    Phillips Arena
+                                    Tuscon, AZ
                                 </td>
                                 <td>
-                                    Basketball
+                                    14
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    FIREBASE
                                 </td>
                                 <td>
-                                    65
+                                    FIREBASE
                                 </td>
                                 <td>
-                                    Score from game
+                                    <span class="city"></span>, <span class="state"></span>
+                                </td>
+                                <td>
+                                    <span id="counter">0</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -128,6 +140,22 @@
         <h3>Upload a Picture</h3>
     </label>
                 <button id="upload_btn">Upload</button>
+            </div>
+            <div class="mainDiv" align="right">
+                <h1 align="left">Firebase File Upload</h1>
+                <progress id="uploader" value="0" max="100">0%</progress>
+                <input type="file" id="fileButton" value="upload" />
+            </div>
+            <form role="form">
+                <div class="form-group">
+                    <input class="form-control" id="photo-input" type="text">
+                </div>
+                <button class="btn btn-default" id="add-photo" type="submit">Upload</button>
+                <hr>
+            </form>
+            <div class="row">
+                <div class="col-md-12" id="well">
+                </div>
             </div>
         </div>
         <div class="row">

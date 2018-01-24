@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="mainDiv" align="left">
+        <h1 align="left">Firebase File Upload</h1>
+        <progress id="uploader" value="0" max="100">0%</progress>
+        <input type="file" id="fileButton" value="upload" />
+    </div>
+    <div>
+        <a>ClickHere</a>
+    </div>
+
+    <script>
+        var config = {
+            apiKey: "AIzaSyBn5xUU9cipD3IVxgi750aYFO-bM_AM85A",
+            authDomain: "midnightsungiants.firebaseapp.com",
+            databaseURL: "https://midnightsungiants.firebaseio.com",
+            projectId: "midnightsungiants",
+            storageBucket: "midnightsungiants.appspot.com",
+            messagingSenderId: "849065062207"
+        };
+
+        firebase.initializeApp(config);
+        var dataRef = firebase.storage();
+
+        var a = $("<input>").attr("href", url).attr("download", "img/ay.jpg").appendTo("body");
+        a[0].click();
+        a.remove();
+    </script>
+</body>
+
+</html>
