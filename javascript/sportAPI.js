@@ -62,6 +62,8 @@ function seasonsStats() {
 		var name= response2.name;
 		var market = response2.market;
 		var ppg  =response2.own_record.average.points;
+		var turn = response2.own_record.average.turnovers;
+		var rebound = response2.own_record.average.rebounds;
 		for (var j = 0; j < 15; j++){
 		 roster[j] = response2.players[j].full_name;
 		 var rosterSpace=roster.join(', ');}
@@ -70,7 +72,7 @@ function seasonsStats() {
 
 //update the dom with a bootstrap card showing stats for the team
 
-		$("#statCards").prepend("<div class='card'><div class='card-body'><h5>"+market+" "+name+"</h5><p>Average Points per Game:"+ppg+"</p><p>Roster</p><p>"+rosterSpace+"</p></div></div>");
+		$("#statCards").prepend("<div class='card statCard'><div class='card-body '><h5>"+market+" "+name+"</h5><p>Average : </p><p>  Points per Game:"+ppg+" Rebounds:"+rebound+" Turnovers:"+turn+"</p><p>Roster : </p><p>"+rosterSpace+"</p></div></div>");
 
 })
 }	
