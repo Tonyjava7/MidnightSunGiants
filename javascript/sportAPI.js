@@ -20,16 +20,16 @@ function loadCityID() {
 
  jQuery.ajaxPrefilter(function(options) {
     if (options.crossDomain && jQuery.support.cors) {
-        options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+        options.url = 'https://stark-chamber-44091.herokuapp.com/' + options.url;
     }
-    
-}); 
+
+});
 	$.ajax({
 		url: queryURL,
 		method: "GET"
 	}).done(function(response) {
 		// console.log(response)
-	
+
 		// v should really be the total number of records in the object, then add an addional if then statement to ensure that each city is only listed once. using 0-100 works for now
 	for(var v = 0; v < 100; v++){
 	// console.log(response)
@@ -48,7 +48,7 @@ function loadCityID() {
 	$(document).on("click", "#stats_btn",loadCityID);
 
 function seasonsStats() {
-	
+
 	seasonStatisticsUrl= ["http://api.sportradar.us/nba/trial/v4/en/seasons/2017/REG/teams/"+cityId+"/statistics.json?api_key=s2pvp6etztq3d6zcyvquqgt4"];
 //legacy link from API docs with the id filled in
 
@@ -77,7 +77,7 @@ function seasonsStats() {
 		$("#statCards").prepend("<div class='card statCard'><div class='card-body '><h5>"+market+" "+name+"</h5><p>Average : </p><p>  Points per Game:"+ppg+" Rebounds:"+rebound+" Turnovers:"+turn+"</p><p>Roster : </p><p>"+rosterSpace+"</p></div></div>");
 
 });
-}	
+}
 // I would love to show the number of wins each team has but this API requres adding the conference and division into the json
 
 // function getRanking(){

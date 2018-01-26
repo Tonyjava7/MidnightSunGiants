@@ -63,12 +63,8 @@ $(document).ready(function(){
             city: city,
             state: state,
             time: time,
-<<<<<<< HEAD
             date: date
-=======
-            date: date,
-//             counter: counter
->>>>>>> 115b6c71c3467a83d4a51619283ab2e4538eb797
+
           });
         });
 
