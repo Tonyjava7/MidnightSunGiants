@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-
+    <script type="text/javascript" src="javascript/geocodeLogan.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
@@ -54,62 +54,62 @@
             <div class="row">
                 <div class="col-md-12">
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">Time</th>
-                                <th scope="col">Venue</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Picture Count</th>
-                                <th scpoe="col">Statistics</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Replace ALL the stuff in the table body with javascript stuff -->
-                            <tr>
-                                <td>
-                                    1/8/18
-                                </td>
-                                <td>
-                                    8:00
-                                </td>
-                                <td>
-                                    Fox
-                                </td>
-                                <td>
-                                    Concert
-                                </td>
-                                <td>
-                                    25
-                                </td>
-                                <td>
-                                    stats
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    1/30/18
-                                </td>
-                                <td>
-                                    7:30
-                                </td>
-                                <td>
-                                    Phillips Arena
-                                </td>
-                                <td>
-                                    Basketball
-                                </td>
-                                <td>
-                                    65
-                                </td>
-                                <td>
-                                    Score from game
-                                </td>
-                            </tr>
-                        </tbody>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Picture Count</th>
+                </tr>
+            </thead>
+            <tbody class="eventTable">
+                <!-- Replace ALL the stuff in the table body with javascript stuff -->
+                <tr data-city: "Chicago">
+                    <td>
+                        01/08/2018
+                    </td>
+                    <td>
+                        8:00 PM
+                    </td>
+                    <td>
+                        Chicago, IL
+                    </td>
+                    <td>
+                        25
+                    </td>
+                </tr>
+                            <tr data-city: "New York">
+                    <td>
+                        01/15/2018
+                    </td>
+                    <td>
+                        6:14 PM
+                    </td>
+                    <td>
+                        New York, NY
+                    </td>
+                    <td>
+                        32
+                    </td>
+                </tr>
+                            <tr data-city: "Phoenix">
+                    <td>
+                        01/19/2018
+                    </td>
+                    <td>
+                        11:52 AM
+                    </td>
+                    <td>
+                        Phoenix, AZ
+                    </td>
+                    <td>
+                        14
+                    </td>
+                </tr>
+            </tbody>
 
-                    </table>
+            </table>
                 </div>
 
             </div>
@@ -121,25 +121,19 @@
 
     <div class="container screen" id="picture_screen">
         <div class="row">
-            <div class="col-md-12">
-                <br>
 
-                <div class="mainDiv" align="left">
+          <div class="mainDiv" align="right">
         <h1 align="left">Firebase File Upload</h1>
         <progress id="uploader" value="0" max="100">0%</progress>
-        <!--<input type="file" id="Joe" value="upload" /> -->
-        <button id="Joe">Joe</button>
+        <input type="file" id="fileButton" value="upload" />
+</div>
+        </div>
+        <div class = "row">
+    <div class="col-md-12" id="well">
     </div>
+</div>
 
-                
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <img src="images/screen1.jpeg" class="photo" alt="picture three" height="400">
-                <img src="images/screen2.jpeg" class="photo" alt="picture four" width="400">
-            </div>
-        </div>
+
     </div>
     
 
