@@ -1,39 +1,139 @@
-geolocation code
-
 $(document).ready(function(){
+  var city = "";
+  var state = "";
+  //geolocator starts here
   var key = "a9a61bb81ae8bbec";
-
-  navigator.geolocation.getCurrentPosition(success,error);
-
+  navigator.geolocation.getCurrentPosition(success, error);
   function error() {
-    alert("Sorry, we're unable to retrieve your location.");
+      alert("Sorry, we're unable to retrieve your location.");
   }
-
   function success(position) {
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
+      $.getJSON("https://api.wunderground.com/api/" + key + "/forecast/geolookup/conditions/q/" + latitude + "," + longitude + ".json", function(data) {
+          city = data.location.city;
+          state = data.location.state;
 
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
 
 
-    $.getJSON("https://api.wunderground.com/api/" + key + "/forecast/geolookup/conditions/q/" + latitude + "," + longitude + ".json", function(data) {
-      $("#desc").html(data.current_observation.weather);
-      $("#city").html(data.location.city);
-      $("#state").html(data.location.state);
-      $("#number").html(data.current_observation.temp_f);
+        //Firebase Storage
+        // var uploader = document.getElementById('uploader');
+        // var fileButton = document.getElementById('fileButton');
+        // fileButton.addEventListener('change', function(e) {
+        //     var file = e.target.files[0];
+        //     var storageRef = firebase.storage().ref('img/' + file.name);
+        //     var metadata = {
+        //         customMetadata: {
+        //             'city': city
+        //         }
+        //     }
+        //     var task = storageRef.put(file, metadata);
+        //     task.on('state_changed', function progress(snapshot) {
+        //         var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        //         uploader.value = percentage;
+        //     }, function error(err) {
+        //     }, function complete() {
+        //     });
+        // });
 
-      if (data.current_observation.weather == "Overcast" || data.current_observation.weather == "Mostly Cloudy" || data.current_observation.weather == "Partly Cloudy") { $("img").attr("src", "https://image.flaticon.com/icons/svg/148/148828.svg")
-                                                                                                                 }
+        // Download starts here
+        var dataRef = firebase.database();
+        var photo = "";
+        var counter = 1;
+        var array = ["Chicago", "New York", "Phoenix"];
+        localStorage.setItem("array", JSON.stringify(array));
+        var storedArray = JSON.parse(localStorage.getItem("array"));
+        var time = "";
+        var date = "";
 
-      if (data.current_observation.weather == "Clear") { $("img").attr("src", "https://image.flaticon.com/icons/svg/136/136723.svg")
-                                                       }
+        var storageRef = firebase.storage();
+        var uploader = document.getElementById('uploader');
+        var fileButton = document.getElementById('fileButton');
 
-      if (data.current_observation.weather == "Rain") { $("img").attr("src", "https://image.flaticon.com/icons/svg/119/119075.svg")
-                                                      }
+        $("#fileButton").on("click", function () {
+          
 
-      $("i").click(function () {
-        $("#number").text($("#number").text() == data.current_observation.temp_f ? data.current_observation.temp_c : data.current_observation.temp_f);
-        $("#scale").text($("#scale").text() == " F" ? " C" : " F");
+          photo = $("#photo-input").val().trim();
+          time = moment(moment()).format("hh:mm A");
+          date = moment().format("L");
+
+          dataRef.ref().push({
+            photo: photo,
+            city: city,
+            state: state,
+            time: time,
+            date: date,
+            counter: counter
+          });
+        });
+
+
+
+        dataRef.ref().on("child_added", function (snapshot) {
+          counter++;
+
+          if (array.indexOf(city) === -1 && (storedArray === null || storedArray.indexOf(city) === -1)) {
+            array.push(snapshot.val().city);
+            localStorage.setItem("array", JSON.stringify(array));
+            storedArray = JSON.parse(localStorage.getItem("array"));
+              $(".eventTable").append("<tr><td id='date'>"+snapshot.val().date+
+            "</td><td id='time'>"+snapshot.val().time+"</td><td>"+
+            snapshot.val().city+", "+snapshot.val().state+"</td><td id='counter'>"+snapshot.val().counter+"</td></tr>");
+          } else {
+            $("#counter").html(snapshot.val().counter);
+            $("#date").html(snapshot.val().date);
+            $("#time").html(snapshot.val().time);
+            }
+
+
+
+          // $("#well").prepend("<img src="+snapshot.val().photo+" class='photos'>")
+
+
+        });
+
+        fileButton.addEventListener('change', function(e) {
+            event.preventDefault();
+            var file = e.target.files[0];
+            var dataRef = storageRef.ref('img/' + file.name);
+
+            var metadata = {
+                customMetadata: {
+                    'city': city
+                }
+            };
+            var task = dataRef.put(file, metadata);
+            task.on('state_changed', function progress(snapshot) {
+                    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    uploader.value = percentage;
+
+                }, function error(err) {}, function complete() {
+                    // var dataRef = storageRef.ref('img/' + file.name);
+                    var downloadURL = task.snapshot.downloadURL;
+                    $('#well').prepend('<img class="photos" src=' + downloadURL + '>');
+                    // dataRef.getMetadata().then(function(metadata) {
+
+                    });
+
+                })
+
+
+
+
       });
-    });
-  }
+  };
+  //geolocator ends here
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCWGmHUJjfT193FB4EjMqd49SAqb5AYwVs",
+    authDomain: "test-project-d958e.firebaseapp.com",
+    databaseURL: "https://test-project-d958e.firebaseio.com",
+    projectId: "test-project-d958e",
+    storageBucket: "test-project-d958e.appspot.com",
+    messagingSenderId: "496730470430"
+  };
+  firebase.initializeApp(config);
+
+
 });

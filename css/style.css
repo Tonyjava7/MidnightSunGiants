@@ -1,8 +1,33 @@
-.photo{
-	margin-top: 1em;
-	margin-left: 1em;
+#logo {
+    height: 3em;
+    width: 3em;
 }
 
-.screen{
-	display: none;
+.photo {
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.screen {
+    display: none;
+}
+
+
+.statCard{
+	max-width: 30%;
+	margin:10px;
+	float:left;
+	border-color: #67b854;
+}
+
+.headPhoto{
+  /*  width: 200px;
+    height: 400px;*/
+    object-fit: contain;
+    background-image: url("../images/crowdPhone.jpeg");
+}
+
+
+.navcss{
+	background-color: #67b854;
 }

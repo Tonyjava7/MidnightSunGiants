@@ -2,14 +2,9 @@
  * firebaseConfig is the configuration information for firebase
  * @type {Object}
  */
-let firebaseConfig = {
-    apiKey: "AIzaSyBn5xUU9cipD3IVxgi750aYFO-bM_AM85A",
-    authDomain: "midnightsungiants.firebaseapp.com",
-    databaseURL: "https://midnightsungiants.firebaseio.com",
-    projectId: "midnightsungiants",
-    storageBucket: "midnightsungiants.appspot.com",
-    messagingSenderId: "849065062207"
-  };
+
+
+ 
 
 /**
  * displayEventScreen displays the event screen
@@ -73,7 +68,6 @@ $( document ).ready(function()
     // Display the event screen
     displayEventScreen();
 
-    // Initialize firebase
-    firebase.initializeApp(firebaseConfig);
+   
 
 }); // End of ready()
