@@ -46,7 +46,12 @@ $(document).ready(function(){
         var time = "";
         var date = "";
 
-        $("#add-photo").on("click", function() {
+        var storageRef = firebase.storage();
+        var uploader = document.getElementById('uploader');
+        var fileButton = document.getElementById('fileButton');
+
+        $("#fileButton").on("click", function () {
+          
 
           photo = $("#photo-input").val().trim();
           time = moment(moment()).format("hh:mm A");
@@ -62,15 +67,17 @@ $(document).ready(function(){
           });
         });
 
-        dataRef.ref().on("child_added", function(snapshot) {
+
+
+        dataRef.ref().on("child_added", function (snapshot) {
           counter++;
 
           if (array.indexOf(city) === -1 && (storedArray === null || storedArray.indexOf(city) === -1)) {
             array.push(snapshot.val().city);
             localStorage.setItem("array", JSON.stringify(array));
             storedArray = JSON.parse(localStorage.getItem("array"));
-            $(".eventTable").append("<tr><td id='date'>"+snapshot.val().date+
-            "</td><td id='time'>"+snapshot.val().time+"</td><td id='statCity'>"+
+              $(".eventTable").append("<tr><td id='date'>"+snapshot.val().date+
+            "</td><td id='time'>"+snapshot.val().time+"</td><td>"+
             snapshot.val().city+", "+snapshot.val().state+"</td><td id='counter'>"+snapshot.val().counter+"</td></tr>");
           } else {
             $("#counter").html(snapshot.val().counter);
@@ -78,8 +85,41 @@ $(document).ready(function(){
             $("#time").html(snapshot.val().time);
             }
 
-          $("#well").prepend("<img src="+snapshot.val().photo+" class='photos'>")
+
+
+          // $("#well").prepend("<img src="+snapshot.val().photo+" class='photos'>")
+
+
         });
+
+        fileButton.addEventListener('change', function(e) {
+            event.preventDefault();
+            var file = e.target.files[0];
+            var dataRef = storageRef.ref('img/' + file.name);
+
+            var metadata = {
+                customMetadata: {
+                    'city': city
+                }
+            };
+            var task = dataRef.put(file, metadata);
+            task.on('state_changed', function progress(snapshot) {
+                    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    uploader.value = percentage;
+
+                }, function error(err) {}, function complete() {
+                    // var dataRef = storageRef.ref('img/' + file.name);
+                    var downloadURL = task.snapshot.downloadURL;
+                    $('#well').prepend('<img class="photos" src=' + downloadURL + '>');
+                    // dataRef.getMetadata().then(function(metadata) {
+
+                    });
+
+                })
+
+
+
+
       });
   };
   //geolocator ends here
