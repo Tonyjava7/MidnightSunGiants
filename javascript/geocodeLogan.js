@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  console.log("connected");
   var city = "";
   var state = "";
   //geolocator starts here
