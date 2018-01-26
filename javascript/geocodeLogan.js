@@ -51,7 +51,7 @@ $(document).ready(function(){
         var fileButton = document.getElementById('fileButton');
 
         $("#fileButton").on("click", function () {
-          
+
 
           photo = $("#photo-input").val().trim();
           time = moment(moment()).format("hh:mm A");
