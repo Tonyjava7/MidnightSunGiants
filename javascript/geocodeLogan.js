@@ -40,7 +40,7 @@ $(document).ready(function(){
         // Download starts here
         var dataRef = firebase.database();
         var photo = "";
-        var counter = 1;
+        var counter = 0;
         var array = ["Chicago", "New York", "Phoenix"];
         localStorage.setItem("array", JSON.stringify(array));
         var storedArray = JSON.parse(localStorage.getItem("array"));
@@ -63,8 +63,7 @@ $(document).ready(function(){
             city: city,
             state: state,
             time: time,
-            date: date,
-            counter: counter
+            date: date
           });
         });
 
@@ -79,9 +78,9 @@ $(document).ready(function(){
             storedArray = JSON.parse(localStorage.getItem("array"));
               $(".eventTable").append("<tr><td id='date'>"+snapshot.val().date+
             "</td><td id='time'>"+snapshot.val().time+"</td><td>"+
-            snapshot.val().city+", "+snapshot.val().state+"</td><td id='counter'>"+snapshot.val().counter+"</td></tr>");
+            snapshot.val().city+", "+snapshot.val().state+"</td><td id='counter'>"+counter+"</td></tr>");
           } else {
-            $("#counter").html(snapshot.val().counter);
+            $("#counter").html(counter);
             $("#date").html(snapshot.val().date);
             $("#time").html(snapshot.val().time);
             }
