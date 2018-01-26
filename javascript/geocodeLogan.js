@@ -1,5 +1,16 @@
 $(document).ready(function(){
-  var counter = 0;
+
+  var config = {
+    apiKey: "AIzaSyCWGmHUJjfT193FB4EjMqd49SAqb5AYwVs",
+    authDomain: "test-project-d958e.firebaseapp.com",
+    databaseURL: "https://test-project-d958e.firebaseio.com",
+    projectId: "test-project-d958e",
+    storageBucket: "test-project-d958e.appspot.com",
+    messagingSenderId: "496730470430"
+  };
+
+  firebase.initializeApp(config);
+
   var city = "";
   var state = "";
   //geolocator starts here
@@ -46,7 +57,7 @@ $(document).ready(function(){
         var storedArray = JSON.parse(localStorage.getItem("array"));
         var time = "";
         var date = "";
-
+        var counter = 1;
         var storageRef = firebase.storage();
         var uploader = document.getElementById('uploader');
         var fileButton = document.getElementById('fileButton');
@@ -71,16 +82,14 @@ $(document).ready(function(){
 
 
         dataRef.ref().on("child_added", function (snapshot) {
-          counter++;
 
-          if (array.indexOf(city) === -1 && (storedArray === null || storedArray.indexOf(city) === -1)) {
-            array.push(snapshot.val().city);
-            localStorage.setItem("array", JSON.stringify(array));
-            storedArray = JSON.parse(localStorage.getItem("array"));
-              $(".eventTable").append("<tr><td id='date'>"+snapshot.val().date+
+          if (array.indexOf(city) === -1) {
+            array.push(city);
+            $(".eventTable").append("<tr><td id='date'>"+snapshot.val().date+
             "</td><td id='time'>"+snapshot.val().time+"</td><td>"+
             snapshot.val().city+", "+snapshot.val().state+"</td><td id='counter'>"+counter+"</td></tr>");
           } else {
+            counter++;
             $("#counter").html(counter);
             $("#date").html(snapshot.val().date);
             $("#time").html(snapshot.val().time);
@@ -126,15 +135,7 @@ $(document).ready(function(){
   //geolocator ends here
 
   // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCWGmHUJjfT193FB4EjMqd49SAqb5AYwVs",
-    authDomain: "test-project-d958e.firebaseapp.com",
-    databaseURL: "https://test-project-d958e.firebaseio.com",
-    projectId: "test-project-d958e",
-    storageBucket: "test-project-d958e.appspot.com",
-    messagingSenderId: "496730470430"
-  };
-  firebase.initializeApp(config);
+
 
 
 });
