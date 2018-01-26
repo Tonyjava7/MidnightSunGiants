@@ -53,12 +53,12 @@ $(document).ready(function(){
         $("#fileButton").on("click", function () {
 
 
-          photo = $("#photo-input").val().trim();
+          // photo = $("#photo-input").val().trim();
           time = moment(moment()).format("hh:mm A");
           date = moment().format("L");
 
           dataRef.ref().push({
-            photo: photo,
+            // photo: photo,
             city: city,
             state: state,
             time: time,
