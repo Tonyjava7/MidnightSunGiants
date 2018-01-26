@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+  var counter = 0;
   var city = "";
   var state = "";
   //geolocator starts here
@@ -40,7 +40,7 @@ $(document).ready(function(){
         // Download starts here
         var dataRef = firebase.database();
         var photo = "";
-        var counter = 0;
+
         var array = ["Chicago", "New York", "Phoenix"];
         localStorage.setItem("array", JSON.stringify(array));
         var storedArray = JSON.parse(localStorage.getItem("array"));
