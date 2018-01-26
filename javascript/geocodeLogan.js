@@ -70,7 +70,7 @@ $(document).ready(function(){
             localStorage.setItem("array", JSON.stringify(array));
             storedArray = JSON.parse(localStorage.getItem("array"));
             $(".eventTable").append("<tr><td id='date'>"+snapshot.val().date+
-            "</td><td id='time'>"+snapshot.val().time+"</td><td>"+
+            "</td><td id='time'>"+snapshot.val().time+"</td><td id='statCity'>"+
             snapshot.val().city+", "+snapshot.val().state+"</td><td id='counter'>"+snapshot.val().counter+"</td></tr>");
           } else {
             $("#counter").html(snapshot.val().counter);
