@@ -12,6 +12,22 @@
     display: none;
 }
 
-.snippet{
-	
+
+.statCard{
+	max-width: 30%;
+	margin:10px;
+	float:left;
+	border-color: #67b854;
+}
+
+.headPhoto{
+  /*  width: 200px;
+    height: 400px;*/
+    object-fit: contain;
+    background-image: url("../images/crowdPhone.jpeg");
+}
+
+
+.navcss{
+	background-color: #67b854;
 }

@@ -31,9 +31,9 @@ var city = "";
 
         var storageRef = firebase.storage();
         var uploader = document.getElementById('uploader');
-        var fileButton = document.getElementById("Joe");
-        console.log("Hello World. fileButton is " + fileButton);
-        fileButton.addEventListener('change', function(e) {
+        //var fileButton = document.getElementById("Joe");
+        //console.log("Hello World. fileButton is " + fileButton);
+        $("#fileButton").on("click", "Joe",  function(e) {
 
             var file = e.target.files[0];
             var dataRef = storageRef.ref('img/' + file.name);
